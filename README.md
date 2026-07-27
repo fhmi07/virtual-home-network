@@ -149,7 +149,7 @@ virtual-home-network/
 
 Detailed project documentation:
 
-- [Basic Network Setup](documentation/01-basic-network-setup.md)
+- [Basic Network Setup](documentation/01-network-design.md)
 - [IP Addressing](documentation/02-ip-addressing.md)
 - [Wireless Configuration](documentation/03-wireless-configuration.md)
 - [Testing Results](documentation/04-testing-results.md)
