@@ -1,6 +1,6 @@
-# 🏠 Secure Virtual Home Network
+# Secure Virtual Home Network
 
-## 📌 Project Overview
+## Project Overview
 
 This project demonstrates the design and implementation of a secure virtual home network using Cisco Packet Tracer.
 
@@ -8,7 +8,7 @@ The objective of this project is to simulate a realistic home network environmen
 
 ---
 
-## 🎯 Objectives
+## Objectives
 
 - Design a functional home network topology
 - Configure routers, switches, and wireless devices
@@ -18,7 +18,7 @@ The objective of this project is to simulate a realistic home network environmen
 
 ---
 
-## 🛠️ Technologies Used
+## Technologies Used
 
 - Cisco Packet Tracer
 - Cisco IOS Command Line Interface (CLI)
@@ -31,24 +31,24 @@ The objective of this project is to simulate a realistic home network environmen
 
 ---
 
-## 🌐 Network Features
+## Network Features
 
 The network will include:
 
-- ✅ Basic network topology design
-- ⬜ IP addressing and subnet planning
-- ⬜ DHCP configuration
-- ⬜ VLAN segmentation
-- ⬜ Wireless network setup
-- ⬜ Guest WiFi isolation
-- ⬜ SSH secure device management
-- ⬜ Switch port security
-- ⬜ ACL traffic filtering
-- ⬜ Network testing and documentation
+- Basic home network topology design
+- IP addressing and subnet planning
+- DHCP configuration
+- VLAN segmentation
+- Wireless network setup
+- Guest WiFi isolation
+- SSH secure device management
+- Switch port security
+- ACL traffic filtering
+- Network testing and documentation
 
 ---
 
-## 📂 Project Structure
+## Project Structure
 
 ```
 virtual-home-network/
@@ -71,9 +71,9 @@ virtual-home-network/
 
 ---
 
-## 🔐 Security Implementation
+## Security Implementation
 
-Security features planned for this project:
+Security features implemented in this project:
 
 - Network segmentation using VLANs
 - Secure remote device management using SSH
@@ -84,7 +84,7 @@ Security features planned for this project:
 
 ---
 
-## 🧪 Testing
+## Testing
 
 Testing will include:
 
@@ -96,7 +96,7 @@ Testing will include:
 
 ---
 
-## 🚀 Future Improvements
+## Future Improvements
 
 Future enhancements may include:
 
@@ -108,9 +108,9 @@ Future enhancements may include:
 
 ---
 
-## 👨‍💻 Author
+## Author
 
-**Muhammad Fahmi**
+Muhammad Fahmi
 
 Cybersecurity Student  
 Multimedia University (MMU)
