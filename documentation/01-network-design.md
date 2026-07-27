@@ -2,82 +2,131 @@
 
 ## Project Purpose
 
-The purpose of this project is to design and simulate a secure virtual home network using Cisco Packet Tracer.
+The purpose of this project is to design and implement a secure virtual home network using Cisco Packet Tracer.
 
-The network will represent a realistic home environment containing personal devices, wireless connectivity, and basic network services while implementing cybersecurity best practices.
+The network simulates a realistic home environment containing personal devices, wireless clients, internal services, and network management infrastructure while applying networking and cybersecurity concepts.
 
----
-
-## Network Requirements
-
-The virtual home network should support:
-
-- Wired and wireless devices
-- Internet connectivity simulation
-- Internal device communication
-- Secure device management
-- Network segmentation
-- Basic security controls
+The project is implemented in multiple phases, beginning with a functional network foundation followed by security improvements through segmentation and secure management.
 
 ---
 
-## Network Devices
+# Network Requirements
 
-The following devices will be used:
+The virtual home network is designed to support:
+
+- Wired and wireless device connectivity
+- Internal network communication
+- DHCP services
+- VLAN-based network segmentation
+- Inter-VLAN routing
+- Secure remote device management
+- Future security controls such as ACL and port security
+
+---
+
+# Network Devices
+
+The following devices are implemented:
 
 | Device | Purpose |
 |---|---|
-| Cisco Router | Provides routing and internet gateway functionality |
-| Cisco Switch | Connects wired devices and manages LAN communication |
-| Wireless Router / Access Point | Provides wireless connectivity |
-| Desktop PC | Represents a personal workstation |
-| Laptop | Represents a mobile user device |
-| Printer | Represents a shared network device |
-| Server | Provides local network services |
-| Smartphone / Tablet | Represents wireless clients |
+| Cisco ISR 4331 Router | Provides routing, DHCP services, and inter-VLAN communication |
+| Cisco Catalyst 2960 Switch | Provides LAN connectivity and VLAN management |
+| Cisco AP-PT | Provides wireless network access |
+| Desktop-PC | Represents trusted personal workstation |
+| Work-Laptop | Represents wireless client device |
+| Home Server | Provides internal network services |
+| Network Printer | Represents shared network peripheral |
+| Mobile Phone | Represents wireless client |
+| Tablet | Represents wireless client |
 
 ---
 
-## Proposed Network Layout
+# Implemented Network Architecture
+
+The network follows a segmented architecture using VLANs.
 
 ```
-                    Internet
-                       |
-                 Home Router
-                       |
-                 Main Switch
-        --------------------------------
-        |        |        |        |
-     Desktop  Laptop  Printer  Server
-                       |
-                 Wireless Access Point
-                       |
-              -----------------
-              |               |
-          Smartphone       Tablet
+                         ISR 4331 Router
+                              |
+                       802.1Q Trunk Link
+                              |
+                       Catalyst 2960 Switch
+                              |
+        ------------------------------------------------
+        |                 |              |              |
+     VLAN 10          VLAN 30        VLAN 40        VLAN 99
+    PERSONAL        GUEST_WIFI      SERVERS      MANAGEMENT
+        |                 |              |              |
+    Desktop-PC       Laptop         Server        Switch SSH
+                     Phone          Printer
+                     Tablet
 ```
 
 ---
 
-## Security Considerations
+# VLAN Design
 
-The network will implement:
+| VLAN | Name | Purpose |
+|---|---|---|
+| VLAN 10 | PERSONAL | Trusted personal devices |
+| VLAN 30 | GUEST_WIFI | Wireless client devices |
+| VLAN 40 | SERVERS | Internal servers and network services |
+| VLAN 99 | MANAGEMENT | Network device administration |
 
-- VLAN segmentation
+---
+
+# Routing Design
+
+Inter-VLAN communication is implemented using a router-on-a-stick design.
+
+The ISR 4331 router uses subinterfaces with 802.1Q encapsulation to provide gateways for each VLAN.
+
+Example:
+
+```
+GigabitEthernet0/0/0.10
+192.168.10.1
+
+GigabitEthernet0/0/0.30
+192.168.30.1
+
+GigabitEthernet0/0/0.40
+192.168.40.1
+
+GigabitEthernet0/0/0.99
+192.168.99.1
+```
+
+---
+
+# Security Considerations
+
+Implemented security features:
+
+- VLAN-based network segmentation
+- Separate management network
 - Secure remote management using SSH
-- Strong authentication
-- Switch port security
+- Strong authentication configuration
+- Network configuration documentation
+
+Future security enhancements:
+
 - Access Control Lists (ACL)
-- Network testing and validation
+- Switch port security
+- Firewall implementation
+- Intrusion Detection System simulation
+- Network monitoring and logging
 
 ---
 
-## Future Expansion
+# Future Expansion
 
 Possible future improvements:
 
-- Firewall implementation
+- Internet access simulation
+- Firewall deployment
 - VPN access
-- Intrusion Detection System
 - IoT network isolation
-- Network monitoring
+- Security event monitoring
+- Advanced access control policies

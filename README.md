@@ -2,9 +2,9 @@
 
 ## Project Overview
 
-This project demonstrates the design and implementation of a virtual home network using Cisco Packet Tracer.
+This project demonstrates the design and implementation of a secure virtual home network using Cisco Packet Tracer.
 
-The objective of this project is to simulate a realistic home network environment while applying networking and cybersecurity concepts such as IP addressing, DHCP configuration, wireless networking, network segmentation, and security hardening.
+The objective of this project is to simulate a realistic home network environment while applying networking and cybersecurity concepts such as IP addressing, DHCP configuration, wireless networking, VLAN segmentation, inter-VLAN routing, secure remote management, and network hardening.
 
 The project is developed in multiple phases, starting with a functional network foundation before implementing cybersecurity improvements.
 
@@ -12,12 +12,14 @@ The project is developed in multiple phases, starting with a functional network 
 
 # Objectives
 
-- Design a functional home network topology
+- Design a functional and secure home network topology
 - Configure routers, switches, and wireless devices
 - Implement proper IP addressing and network communication
 - Configure DHCP services for client devices
+- Implement VLAN-based network segmentation
+- Configure secure device management using SSH
 - Apply cybersecurity practices to improve network security
-- Document network configurations, testing results, and security implementations
+- Document network configurations and testing results
 
 ---
 
@@ -28,6 +30,8 @@ The project is developed in multiple phases, starting with a functional network 
 - IPv4 Networking
 - DHCP
 - VLAN Configuration
+- Router-on-a-Stick (802.1Q Trunking)
+- Inter-VLAN Routing
 - SSH Remote Management
 - Access Control Lists (ACL)
 - Switch Port Security
@@ -39,11 +43,11 @@ The project is developed in multiple phases, starting with a functional network 
 
 | Device | Purpose |
 |---|---|
-| Cisco ISR 4331 Router | Routing and DHCP services |
-| Cisco Catalyst 2960 Switch | LAN connectivity |
+| Cisco ISR 4331 Router | Routing, DHCP, and inter-VLAN communication |
+| Cisco Catalyst 2960 Switch | LAN connectivity and VLAN management |
 | Cisco AP-PT | Wireless network access |
-| Desktop-PC | Wired client device |
-| Work-Laptop | Wireless client device |
+| Desktop-PC | Personal wired client |
+| Work-Laptop | Wireless client |
 | Home Server | Internal network service |
 | Network Printer | Network peripheral |
 | Mobile Phone | Wireless client |
@@ -61,9 +65,9 @@ The project is developed in multiple phases, starting with a functional network 
 
 Completed implementation:
 
-- Designed home network topology
+- Designed basic home network topology
 - Configured Cisco ISR 4331 router
-- Configured LAN connectivity through Catalyst 2960 switch
+- Configured Catalyst 2960 switch connectivity
 - Implemented DHCP services
 - Assigned static IP addresses for server and printer
 - Configured wireless connectivity using AP-PT
@@ -72,23 +76,46 @@ Completed implementation:
 
 ---
 
-# IP Addressing Scheme
+# Phase 2: Network Segmentation and Secure Management ✅
 
-Network:
+Completed implementation:
 
-```
-192.168.10.0/24
-```
+- Created VLAN-based network segmentation
+- Configured separate networks for personal devices, guest WiFi, servers, and management
+- Implemented 802.1Q trunking between router and switch
+- Configured router-on-a-stick using router subinterfaces
+- Enabled inter-VLAN routing
+- Configured SSH remote management for secure switch administration
+- Tested communication between VLAN networks
 
-| Device | IP Address | Assignment |
-|---|---|---|
-| Router | 192.168.10.1 | Static |
-| Home Server | 192.168.10.10 | Static |
-| Network Printer | 192.168.10.20 | Static |
-| Desktop-PC | 192.168.10.21 | DHCP |
-| Work-Laptop | 192.168.10.24 | DHCP |
-| Mobile Phone | 192.168.10.26 | DHCP |
-| Tablet | 192.168.10.27 | DHCP |
+---
+
+# VLAN Design and IP Addressing
+
+| VLAN | Purpose | Network | Gateway |
+|---|---|---|---|
+| VLAN 10 | Personal Devices | 192.168.10.0/24 | 192.168.10.1 |
+| VLAN 30 | Guest WiFi | 192.168.30.0/24 | 192.168.30.1 |
+| VLAN 40 | Servers | 192.168.40.0/24 | 192.168.40.1 |
+| VLAN 99 | Management | 192.168.99.0/24 | 192.168.99.1 |
+
+---
+
+# Device IP Addressing
+
+| Device | VLAN | IP Address | Assignment |
+|---|---|---|---|
+| Router VLAN 10 | VLAN 10 | 192.168.10.1 | Gateway |
+| Router VLAN 30 | VLAN 30 | 192.168.30.1 | Gateway |
+| Router VLAN 40 | VLAN 40 | VLAN 40 | Gateway |
+| Router VLAN 99 | VLAN 99 | 192.168.99.1 | Gateway |
+| Desktop-PC | VLAN 10 | 192.168.10.21 | Static |
+| Work-Laptop | VLAN 30 | 192.168.30.3 | Static |
+| Mobile Phone | VLAN 30 | 192.168.30.2 | Static |
+| Tablet | VLAN 30 | 192.168.30.4 | Static |
+| Home Server | VLAN 40 | 192.168.40.10 | Static |
+| Network Printer | VLAN 40 | 192.168.40.20 | Static |
+| Switch Management | VLAN 99 | 192.168.99.2 | Static |
 
 ---
 
@@ -114,7 +141,7 @@ Encryption:
 AES
 ```
 
-Connected wireless clients:
+Wireless clients:
 
 - Work-Laptop
 - Mobile Phone
@@ -153,23 +180,32 @@ Detailed project documentation:
 - [IP Addressing](documentation/02-ip-addressing.md)
 - [Wireless Configuration](documentation/03-wireless-configuration.md)
 - [Testing Results](documentation/04-testing-results.md)
+- [VLAN Configuration](documentation/05-vlan-configuration.md)
+- [Router-on-a-Stick Configuration](documentation/06-router-on-stick.md)
+- [SSH Management](documentation/07-ssh-management.md)
 
 ---
 
 # Security Implementation
 
-## Planned Security Enhancements
-
-The following cybersecurity features will be implemented in future phases:
+## Completed Security Features
 
 - VLAN-based network segmentation
-- Guest WiFi isolation
-- SSH secure device management
-- Switch port security
+- Network separation between personal, guest, server, and management networks
+- Secure device management using SSH
+- Strong authentication configuration
+- Basic network hardening practices
+
+## Future Security Enhancements
+
+Future improvements include:
+
 - Access Control Lists (ACL)
-- Network hardening techniques
+- Switch port security
+- Guest WiFi isolation rules
 - Firewall implementation
 - IDS monitoring simulation
+- Network logging and security analysis
 
 ---
 
@@ -179,9 +215,9 @@ Testing performed:
 
 - Device connectivity testing
 - IP address verification
-- DHCP address assignment verification
-- Wired network communication testing
-- Wireless connectivity testing
+- VLAN communication testing
+- Inter-VLAN routing verification
+- SSH remote management testing
 - Configuration validation
 
 ---

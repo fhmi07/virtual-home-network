@@ -1,22 +1,26 @@
-# Phase 1 Testing Results
+# Network Testing Results
 
 ## Overview
 
-Phase 1 focused on implementing a functional virtual home network environment using Cisco Packet Tracer.
+Testing was performed throughout the implementation phases of the virtual home network.
 
-The objective was to establish wired and wireless connectivity, configure DHCP services, assign static IP addresses, and verify communication between network devices.
+Phase 1 focused on establishing a functional network environment including wired connectivity, wireless connectivity, DHCP services, and basic communication testing.
+
+Phase 2 focused on validating network segmentation, VLAN configuration, inter-VLAN routing, and secure remote management using SSH.
 
 ---
 
-# Connectivity Testing
+# Phase 1 Testing Results
 
 ## Router Connectivity
 
 All network devices successfully communicated with the ISR 4331 router.
 
-Router IP:
+Router:
 
+```
 192.168.10.1
+```
 
 Result:
 
@@ -26,18 +30,12 @@ PASS
 
 ## Internal Network Communication
 
-Server:
+Initial testing was performed on the flat network design.
 
-192.168.10.10
-
-Printer:
-
-192.168.10.20
-
-Testing performed:
+Devices tested:
 
 - Desktop-PC to Server
-- Work-Laptop to Server
+- Desktop-PC to Printer
 - Wireless clients to Server
 - Wired and wireless device communication
 
@@ -70,19 +68,23 @@ PASS
 
 Wireless connectivity was implemented using Cisco AP-PT.
 
-The Access Point functions as a Layer 2 wireless bridge, allowing wireless devices to communicate with the wired LAN.
-
 SSID:
 
+```
 Fahmi-Home-Network
+```
 
 Security:
 
+```
 WPA2-PSK
+```
 
 Encryption:
 
+```
 AES
+```
 
 Connected wireless clients:
 
@@ -96,21 +98,136 @@ PASS
 
 ---
 
-# Phase 1 Conclusion
+# Phase 2 Testing Results
 
-The virtual home network was successfully implemented and tested.
+## VLAN Configuration Testing
 
-The completed network provides:
+The switch was configured with multiple VLANs to separate network traffic.
 
-- Wired LAN connectivity
-- Wireless connectivity
-- DHCP services
-- Static IP management
-- Internal device communication
+Configured VLANs:
 
-The next phase will focus on improving network security through:
+| VLAN | Purpose |
+|---|---|
+| VLAN 10 | Personal Devices |
+| VLAN 30 | Guest WiFi |
+| VLAN 40 | Servers |
+| VLAN 99 | Management |
 
-- VLAN segmentation
-- Secure device management
-- Access control policies
-- Network hardening techniques
+Verification command:
+
+```
+show vlan brief
+```
+
+Result:
+
+PASS
+
+---
+
+## Trunk Link Testing
+
+The connection between the ISR 4331 router and Catalyst 2960 switch was configured as an 802.1Q trunk.
+
+Interface:
+
+```
+Router G0/0/0
+|
+Switch Gi0/1
+```
+
+Verification command:
+
+```
+show interfaces trunk
+```
+
+Expected result:
+
+```
+Gig0/1 trunking
+```
+
+Result:
+
+PASS
+
+---
+
+## Inter-VLAN Routing Testing
+
+Router-on-a-stick was implemented using router subinterfaces.
+
+Configured gateways:
+
+| VLAN | Gateway |
+|---|---|
+| VLAN 10 | 192.168.10.1 |
+| VLAN 30 | 192.168.30.1 |
+| VLAN 40 | 192.168.40.1 |
+| VLAN 99 | 192.168.99.1 |
+
+Connectivity tests:
+
+| Source | Destination | Result |
+|---|---|---|
+| Desktop-PC (192.168.10.21) | Server (192.168.40.10) | PASS |
+| Desktop-PC (192.168.10.21) | Mobile Phone (192.168.30.2) | PASS |
+
+Result:
+
+PASS
+
+---
+
+## SSH Remote Management Testing
+
+Secure remote management was configured on the Catalyst 2960 switch.
+
+Switch Management IP:
+
+```
+192.168.99.2
+```
+
+Testing performed:
+
+- SSH connection from Desktop-PC
+- User authentication verification
+- Privileged EXEC access verification
+
+SSH command:
+
+```
+ssh -l fahmi 192.168.99.2
+```
+
+Result:
+
+PASS
+
+---
+
+# Current Network Status
+
+The virtual home network currently provides:
+
+- Wired network connectivity
+- Wireless network connectivity
+- VLAN-based segmentation
+- Inter-VLAN communication
+- Secure remote switch management
+- Separate personal, guest, server, and management networks
+
+---
+
+# Future Testing
+
+Future phases will include testing of:
+
+- ACL traffic filtering
+- Guest network isolation
+- Switch port security
+- Firewall rules
+- Network monitoring capabilities
